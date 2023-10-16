@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% if selected %}
+  <title>{{ selected }}</title>
+  {% endif %}
+  <title>Меню</title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+
+  <div class="container">
+
+
+    <div class="left">
+
+      <h2>Все элементы ↓</h2>
+      <h3>Нажмите на элемент, чтобы он отобразился справа</h3>
+      <ul>
+        {% for el in allMenu %}
+          <li class="left__li li">
+            <span onclick=setElement(this)>{{ el }}</span>
+            <div class="left__bg"></div>
+          </li>
+        {% endfor %}
+      </ul>
+
+    </div>
+
+
+    <div class="right">
+
+      <h2>Верхние элементы ↓</h2>
+      {% if parents %}
+      <ul class="right__parents">
+        {% for el in parents %}
+          <li class="li">
+            <span class="right__parent">{{ el }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="none">Пусто</p>
+      {% endif %}
+
+      <div class="line"></div>
+      <h2>Выбранный элемент</h2>
+      {% if selected %}
+      <p class="selected">{{ selected }}</p>
+      {% else %}
+      <p class="none">Пусто</p>
+      {% endif %}
+
+      <div class="line"></div>
+      <h2>Нижние элементы ↓</h2>
+      {% if childrens %}
+      <ul class="right__parents">
+        {% for el in childrens %}
+          <li class="li">
+            <span class="right__parent">{{ el.name }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="none">Пусто</p>
+      {% endif %}
+
+    </div>
+
+
+    <div class="desc">
+      <p class="desc__p">Несовсем понял тз, но основные пункты вроде выполнил</p>
+      <p class="desc__p">Имя и пароль от админки - admin</p>
+    </div>
+
+    
+  </div>
+
+  <script src="{% static 'scripts/index.js' %}"></script>
+</body>
+</html>
